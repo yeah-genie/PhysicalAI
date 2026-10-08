@@ -1,3 +1,6 @@
 web/.vercel/
 web/node_modules/
 site-preview/
+
+.vercel
+.env*
