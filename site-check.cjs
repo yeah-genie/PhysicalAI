@@ -21,7 +21,23 @@ const fs=require('node:fs');
           await page.locator('#model').selectOption('pna');
           assert.match(await page.locator('#result-summary').innerText(),/701건, 정상 라벨 163건/);
         }
-        if (file==='index.html') assert.ok(await page.locator('#graph circle').count()>30);
+        if (file==='index.html') {
+          assert.ok(await page.locator('#graph circle').count()>30);
+          assert.equal(await page.locator('.slide-dots button').count(),6);
+          await page.locator('.slide-dots button').nth(2).click();
+          await page.waitForFunction(()=>document.body.dataset.visual==='finance');
+          const financeX=await page.locator('#graph circle').first().getAttribute('cx');
+          await page.locator('.next-slide').click();
+          await page.waitForFunction(()=>document.body.dataset.visual==='robotics');
+          await page.waitForFunction(x=>document.querySelector('#graph circle').getAttribute('cx')!==x,financeX);
+          assert.equal(await page.locator('.motion-toggle').getAttribute('aria-pressed'),'true');
+          await page.locator('.motion-toggle').click();
+          assert.equal(await page.locator('.motion-toggle').getAttribute('aria-pressed'),'false');
+          await page.locator('.motion-toggle').click();
+          await page.locator('.slide-dots button').first().click();
+          await page.waitForFunction(()=>document.querySelector('.slide-name').textContent==='소개');
+          if(width===1440)await page.screenshot({path:'site-preview/cover.png'});
+        }
         await page.screenshot({path:`site-preview/${file.replace('.html','')}-${width}.png`,fullPage:true});
       }
     }
@@ -29,3 +45,4 @@ const fs=require('node:fs');
     console.log('PASS: 3 pages at 1440/390/320px, no overflow, model selection, graph, no JS errors');
   } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
+
