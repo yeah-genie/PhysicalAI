@@ -11,7 +11,7 @@ const fs=require('node:fs');
     for (const width of [1440,390,320]) {
       await page.setViewportSize({width,height:1000});
       for (const file of ['index.html','aml.html','robotics.html']) {
-        await page.goto(`http://127.0.0.1:8000/${file}`);
+        await page.goto(`${process.env.SITE_URL || 'http://127.0.0.1:8000'}/${file}`);
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${file} overflows at ${width}`);
         if (file==='aml.html') {
           await page.locator('#model').selectOption('xgboost');

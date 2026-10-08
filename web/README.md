@@ -2,6 +2,8 @@
 
 나예진의 금융·AML 및 제조·로봇 포트폴리오 첫 버전. HTML/CSS/JavaScript 정적 사이트이며 프레임워크와 빌드 단계가 없다.
 
+공개 사이트: https://yejin-signals-systems.vercel.app/
+
 - `index.html`: 공통 포트폴리오, 설명용 연결망, 프로젝트·학습 기록 링크
 - `aml.html`: 문서에 기록된 단일 실행 결과와 모델 선택 인터랙션
 - `robotics.html`: 현재 학습 단계, 향후 로드맵
