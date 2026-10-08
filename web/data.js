@@ -10,3 +10,9 @@ export function resultFor(key) {
   if (!model) throw new RangeError('Unknown model');
   return {...model, normal:reviewCount-model.detected, precision:100*model.detected/reviewCount};
 }
+
+export function planar2R(theta1, theta2) {
+  if (![theta1, theta2].every(Number.isFinite)) throw new TypeError('Angles must be finite');
+  const a=theta1*Math.PI/180, b=(theta1+theta2)*Math.PI/180;
+  return {elbow:[Math.cos(a),Math.sin(a)],tip:[Math.cos(a)+Math.cos(b),Math.sin(a)+Math.sin(b)]};
+}
