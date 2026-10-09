@@ -1,1 +1,105 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="AML 연구 발표 및 학습·실험 기록"><title>AML 연구 발표 — 나예진</title><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head><body class="deck-page finance"><a class="skip" href="#main">본문으로 이동</a><div id="deck-frame"><header class="deck-header"><a class="brand" href="index.html">YR<span> / SIGNALS & SYSTEMS</span></a><nav aria-label="프로젝트 메뉴"><a href="aml.html" aria-current=page>Financial AI</a><a href="robotics.html" >Physical AI</a><button class="motion-toggle" aria-pressed="false">움직임 줄이기</button></nav></header><aside class="slide-rail" aria-label="발표 목차"></aside><main id="main" class="deck" tabindex="-1"><section class="slide" data-title="연구 질문" data-scene="overview"><span class="ghost" aria-hidden="true">AML</span><div class="slide-copy"><p class="eyebrow">FINANCIAL AI / STUDY REPORT · 01</p><h1>거래 한 건에서,<br><em>연결된 거래로.</em></h1><p class="lead">같은 검토량 안에서<br>자금세탁 거래를 더 많이 찾을 수 있을까?</p><div class="chips"><span>IBM AML HI-Small</span><span>4개 모델 비교</span><span>단일 실행</span></div><p class="byline">나예진 · 딥러닝 과제 기반 연구 기록</p><div class="agenda"><span>문제</span><span>데이터</span><span>모델</span><span>결과</span><span>한계</span><span>다음 실험</span></div></div><div class="visual-slot"></div></section><section class="slide" data-title="문제" data-scene="single"><span class="ghost" aria-hidden="true">QUESTION</span><div class="slide-copy"><p class="eyebrow">01 / WHY THIS PROBLEM</p><h2>전부 조사할 수 없다면,<br><em>무엇부터 볼까?</em></h2><p class="lead">대부분은 정상 거래입니다.<br>정확도 하나로는 중요한 오류를 놓칠 수 있습니다.</p><div class="cards"><article><span>데이터의 조건</span><h3>자금세탁 라벨 약 0.10%</h3><p>IBM 합성 데이터의 전체 거래 기준입니다.</p></article><article><span>평가의 질문</span><h3>같은 수를 검토한다면?</h3><p>점수 상위 864건에서 실제 양성 라벨을 비교합니다.</p></article></div><p class="note">864건은 이 실험의 비교 기준이며 실제 은행의 조사 예산은 아닙니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="데이터" data-scene="network"><span class="ghost" aria-hidden="true">DATA</span><div class="slide-copy"><p class="eyebrow">02 / FROM TABLE TO GRAPH</p><h2>거래는 행 하나이자,<br><em>계좌 사이의 연결.</em></h2><p class="lead">표에서는 거래 특징을 읽고,<br>그래프에서는 주변 거래 관계를 함께 읽습니다.</p><div class="number-strip"><div><b>5,078,345</b><span>전체 거래</span></div><div><b>5,177</b><span>자금세탁 라벨</span></div></div><div class="step-list"><p><b>노드</b> 계좌</p><p><b>간선</b> 계좌 사이의 거래</p><p><b>목표</b> 거래별 자금세탁 라벨 예측</p></div><p class="note">오른쪽 연결망은 구조 설명용 예시입니다. 실제 계좌나 거래를 재현하지 않습니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="모델" data-scene="neighborhood"><span class="ghost" aria-hidden="true">MODELS</span><div class="slide-copy"><p class="eyebrow">03 / WHAT EACH MODEL CAN SEE</p><h2>거래의 특징만?<br><em>주변 관계도 함께?</em></h2><div class="compare"><article><span>TRANSACTION FEATURES</span><h3>XGBoost · Edge-MLP</h3><p>거래 한 건의 특징을 사용하는 기준선.</p></article><article><span>FEATURES + RELATIONS</span><h3>GIN · PNA</h3><p>거래 특징에 주변 관계 정보를 더하는 그래프 모델.</p></article></div><button id="relation-toggle" class="action" aria-pressed="true">주변 연결 숨기기</button><p class="note">버튼은 모델이 보는 정보의 차이를 설명합니다. 실제 예측이나 중요도를 계산하지 않습니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="결과 비교" data-scene="results"><span class="ghost" aria-hidden="true">RESULTS</span><div class="slide-copy"><p class="eyebrow">04 / ONE BUDGET · FOUR MODELS</p><h2>864건을 검토할 때,<br><em>무엇을 찾았나?</em></h2><div class="model-control"><label for="model">모델 선택</label><select id="model"><option value="xgboost">XGBoost</option><option value="mlp">Edge-MLP</option><option value="gin">GIN</option><option value="pna" selected>PNA</option></select></div><p id="model-description" class="model-description"></p><div class="result-bars"><div class="result-row" data-model="xgboost"><span>XGBoost</span><div class="bar-track"><div class="bar" style="--value:33.333%"></div></div><b>288</b></div><div class="result-row" data-model="mlp"><span>Edge-MLP</span><div class="bar-track"><div class="bar" style="--value:33.218%"></div></div><b>287</b></div><div class="result-row" data-model="gin"><span>GIN</span><div class="bar-track"><div class="bar" style="--value:61.227%"></div></div><b>529</b></div><div class="result-row" data-model="pna"><span>PNA</span><div class="bar-track"><div class="bar" style="--value:81.134%"></div></div><b>701</b></div></div><div class="metrics"><div><span>TEST AP</span><strong id="ap"></strong></div><div><span>TOP-864 PRECISION</span><strong id="precision"></strong></div></div><p id="result-summary" class="result-summary" aria-live="polite"></p><p class="note">AP는 전체 테스트의 순위 지표, Precision은 선택된 864건의 양성 비율입니다. 고정 실험 결과를 표시합니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="한계" data-scene="limits"><span class="ghost" aria-hidden="true">LIMITS</span><div class="slide-copy"><p class="eyebrow">05 / WHAT THE RESULT DOES NOT PROVE</p><h2>높은 점수 다음에는,<br><em>조건을 확인합니다.</em></h2><div class="step-list large"><p><b>01 / 시간순 평가</b> 데이터 내 9월 1–6일 학습, 7–8일 검증, 9–18일 테스트.</p><p><b>02 / 단일 실행</b> 반복 학습에 따른 변동은 아직 확인하지 않았습니다.</p><p><b>03 / 다른 학습 예산</b> GIN과 PNA의 크기·학습 예산이 달라 집계 방식 하나의 효과로 단정할 수 없습니다.</p><p><b>04 / 합성 데이터</b> 실제 은행 환경의 성능을 입증하지 않습니다.</p></div></div><div class="visual-slot"></div></section><section class="slide" data-title="다음 실험" data-scene="next"><span class="ghost" aria-hidden="true">NEXT</span><div class="slide-copy"><p class="eyebrow">06 / NEXT QUESTIONS</p><h2>성능 차이를,<br><em>설명할 수 있을까?</em></h2><div class="step-list large"><p><b>반복 실행</b> 여러 시드에서 결과의 변동 확인</p><p><b>오류 분석</b> 놓친 양성과 잘못 경보한 정상 거래 비교</p><p><b>비용 비교</b> 같은 장비에서 학습 시간·메모리 기록</p></div><div class="links"><a href="https://velog.io/@rhadobby/거래-한-건만-볼까-관계까지-볼까-AML-딥러닝-과제-기록">전체 실험 기록 · Velog ↗</a><a href="https://github.com/yeah-genie/PhysicalAI">학습 저장소 · GitHub ↗</a></div><p class="note">출처: 「딥러닝 과제 - AML」 README 및 공개 학습 기록. 위 세 항목은 앞으로의 계획입니다.</p></div><div class="visual-slot"></div></section></main><div class="stage" aria-label="현재 장의 시각화"></div><div class="deck-footer"><span class="slide-progress" aria-live="polite"></span><span class="slide-name"></span><span class="keyboard-hint">SCROLL / ↑ ↓ · 한 장씩 읽기</span><button class="previous-slide" aria-label="이전 슬라이드">←</button><button class="next-slide" aria-label="다음 슬라이드">→</button></div></div></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="모델 선택 이유, 동일 조사량의 결과, 날짜별 평가에서 배운 점.">
+  <title>AML 모델 비교 — 나예진</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body class="deck-page finance">
+<a class="skip" href="#main">본문으로 이동</a>
+<div id="deck-frame">
+<header class="header">
+  <a class="brand" href="index.html">나예진<span>학습 · 프로젝트</span></a>
+  <nav aria-label="주 메뉴">
+    <a href="aml.html" aria-current="page">AML</a>
+    <a href="robotics.html" >로봇</a>
+    <button class="motion-toggle" aria-pressed="false">움직임 줄이기</button>
+  </nav>
+</header>
+<main id="main" class="deck" tabindex="-1">
+<section class="slide" id="question" data-title="문제">
+  <div class="slide-content">
+    <p class="chapter">01 / 문제</p>
+    <h1>거래 관계를 더하면<br><em>자금세탁 탐지가 달라질까?</em></h1>
+    <p class="lead">IBM 합성 거래 데이터에 네 모델을 적용하고,<br>탐지 성능과 경보 수의 차이를 비교한 딥러닝 과제입니다.</p>
+    <div class="work-summary">
+      <h2>이번 과제에서 한 일</h2>
+      <ul>
+        <li>공통 거래 특징 45개를 구성하고, 날짜순으로 학습·검증·테스트 분할</li>
+        <li>XGBoost · Edge-MLP · GIN · PNA의 단일 실행 결과 비교</li>
+        <li>모델별 경보 수가 달라, 같은 864건을 조사하는 조건에서도 재비교</li>
+      </ul>
+    </div>
+    <p class="source">IBM AML HI-Small · 전체 5,078,345건 중 자금세탁 라벨 5,177건 (약 0.10%)</p>
+  </div>
+</section>
+<section class="slide" id="approach" data-title="비교 설계">
+  <div class="slide-content">
+    <p class="chapter">02 / 비교 설계</p>
+    <h2>모델을 고른 기준은<br><em>사용하는 정보와 처리 방식입니다.</em></h2>
+    <div class="split">
+      <div>
+        <dl class="decisions">
+          <div><dt>XGBoost ↔ Edge-MLP</dt><dd>같은 거래 특징에서 트리 모델과 신경망을 비교합니다. XGBoost는 딥러닝의 효과를 판단할 기준선입니다.</dd></div>
+          <div><dt>Edge-MLP ↔ GIN · PNA</dt><dd>거래 특징에 주변 계좌·거래 관계를 더했을 때의 차이를 봅니다.</dd></div>
+          <div><dt>GIN ↔ PNA</dt><dd>합계 중심 집계와 여러 통계량을 사용하는 집계를 비교합니다. 모델 크기와 학습 예산의 차이도 함께 해석합니다.</dd></div>
+        </dl>
+      </div>
+      <figure class="relation-figure">
+        <svg viewBox="0 0 420 290" role="img" aria-label="A에서 B로 보내는 거래와 두 계좌에 연결된 주변 거래. 점은 계좌, 화살표는 송금 방향입니다.">
+          <defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="currentColor"/></marker></defs>
+          <g class="neighbor-edges" marker-end="url(#arrow)"><path d="M57 55L133 132M54 235L131 158M280 135L355 57M280 157L355 235"/></g>
+          <path class="main-edge" d="M164 145H256" marker-end="url(#arrow)"/>
+          <g class="account"><circle cx="45" cy="45" r="13"/><circle cx="45" cy="245" r="13"/><circle cx="365" cy="45" r="13"/><circle cx="365" cy="245" r="13"/><circle cx="145" cy="145" r="19"/><circle cx="275" cy="145" r="19"/></g>
+          <g class="svg-label"><text x="145" y="190" text-anchor="middle">계좌 A</text><text x="275" y="190" text-anchor="middle">계좌 B</text><text x="210" y="124" text-anchor="middle">거래 특징</text></g>
+        </svg>
+        <figcaption>그래프 모델에는 주변 거래 관계가 추가됩니다.<br><span>구조 설명용 예시</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<section class="slide" id="results" data-title="결과">
+  <div class="slide-content">
+    <p class="chapter">03 / 결과</p>
+    <h2>같은 조사량, <em>다른 탐지 결과.</em></h2>
+    <div class="table-wrap">
+      <table class="results-table">
+        <caption>테스트 결과 · 합성 데이터, 단일 실행</caption>
+        <thead><tr><th scope="col">모델</th><th scope="col">테스트 AP</th><th scope="col">상위 864건 중 탐지 수</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">XGBoost</th><td>17.83%</td><td><span class="count-bar" style="--value:33.333%"></span><span>288건</span></td></tr>
+          <tr><th scope="row">Edge-MLP</th><td>17.62%</td><td><span class="count-bar" style="--value:33.218%"></span><span>287건</span></td></tr>
+          <tr><th scope="row">GIN</th><td>40.71%</td><td><span class="count-bar" style="--value:61.227%"></span><span>529건</span></td></tr>
+          <tr class="best"><th scope="row">PNA</th><td>55.59%</td><td><span class="count-bar" style="--value:81.134%"></span><span>701건</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">AP는 전체 테스트의 순위 평가 지표입니다. 탐지 수는 모델별 점수 상위 864건에 포함된 자금세탁 라벨 수입니다.</p>
+
+  </div>
+</section>
+<section class="slide" id="lessons" data-title="배운 점">
+  <div class="slide-content">
+    <p class="chapter">04 / 배운 점</p>
+    <h2>전체 점수만으로는<br><em>비교가 끝나지 않았습니다.</em></h2>
+    <dl class="lessons">
+      <div><dt>경보 수가 달랐습니다.</dt><dd>모델별 기준으로 선택된 거래 수가 달라, 상위 864건으로 조사량을 맞춰 한 번 더 비교했습니다.</dd></div>
+      <div><dt>날짜별 결과도 달랐습니다.</dt><dd>테스트 후반에는 모델 순서가 바뀌었습니다. 전체 평균과 날짜별 데이터 분포를 함께 봐야 했습니다.</dd></div>
+      <div><dt>집계 방식만 바뀐 게 아니었습니다.</dt><dd>PNA는 GIN보다 파라미터가 약 4.4배 많았습니다. 다음에는 학습 예산을 맞추고 여러 시드에서 결과를 확인할 계획입니다.</dd></div>
+    </dl>
+    <div class="endnote"><p>현재 근거는 합성 데이터의 단일 실행 결과입니다.</p><a href="https://velog.io/@rhadobby/거래-한-건만-볼까-관계까지-볼까-AML-딥러닝-과제-기록">실험 과정과 상세 수치 · Velog ↗</a></div>
+  </div>
+</section>
+</main>
+<footer class="deck-footer">
+  <span class="slide-progress" aria-live="polite"></span>
+  <nav class="chapter-nav" aria-label="발표 목차"><a href="#question">문제</a><a href="#approach">비교 설계</a><a href="#results">결과</a><a href="#lessons">배운 점</a></nav>
+  <button class="previous-slide" aria-label="이전 장">←</button>
+  <button class="next-slide" aria-label="다음 장">→</button>
+</footer>
+</div>
+</body>
+</html>

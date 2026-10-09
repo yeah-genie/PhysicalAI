@@ -1,20 +1,31 @@
 # Signals & Systems
 
-나예진의 금융·AML 및 제조·로봇 포트폴리오. HTML/CSS/JavaScript 정적 사이트이며 추가 패키지와 빌드 과정이 없다.
-
 공개 사이트: https://yejin-signals-systems.vercel.app/
 
-- `index.html`: 프로젝트 발표 자료로 들어가는 공통 입구와 학습 링크
-- `aml.html`: 연구 질문 → 문제 → 데이터 → 모델 → 결과 → 한계 → 다음 실험, 총 7장
-- `robotics.html`: 현재 학습 → 2R 자세 데모 → C-space → 계획 → 학습 근거, 총 5장
+나예진의 학습 기록을 읽는 정적 포트폴리오다. 별도 프레임워크·빌드·서버 API 없이 HTML/CSS/JavaScript로 제공한다.
 
-데스크톱 발표는 1600×900 설계 화면을 창에 맞게 통째로 축소한다. 모바일 700px 이하에서는 세로로 읽는 문서로 전환한다. 스크롤, 목차, 이전·다음 버튼, 방향키·PageUp/Down·Home/End로 장을 이동할 수 있다. 시스템의 움직임 줄이기 설정과 화면의 별도 버튼을 지원한다.
+- `index.html`: AML 실험과 로봇 학습으로 들어가는 입구
+- `aml.html`: 문제 → 비교 설계 → 결과 → 배운 점, 4장
+- `robotics.html`: 공부한 내용 → 각도와 자세 → 다음 공부, 3장
 
-AML 수치는 기존 AML README와 공개 학습 기록에 기록된 단일 실행 결과다. 864칸의 결과 그림은 한 칸이 선택된 거래 한 건인 집계 그림이며 실제 순위나 개별 예측을 표시하지 않는다. 연결망과 주변 관계 버튼은 설명용이다. 원시 CSV가 없어 실시간 추론·임계값 시뮬레이션은 제공하지 않는다.
+## 내용과 근거
 
-로봇 데모는 이 사이트에서 새로 구현한 이상적 평면 2R 기구학이다. 두 링크의 길이는 1이며 두 번째 각도는 첫 번째 링크에 대한 상대각이다. 관절 제한·충돌·동역학·실물 제어는 구현하지 않았다. C-space 설명은 Modern Robotics 2.3.1 공식 자료를 참고했다. 이 데모를 과거에 완료했던 학습 실습으로 서술하지 않는다.
+AML은 기존 프로젝트 README, `docs/research_explained_and_qa.md`, 공개 Velog 글의 실험 결과와 선택 이유를 요약한다. 새로 모델을 학습하거나 개인별 기여를 추정하지 않았다. 결과 표는 정적 HTML로 모든 모델의 AP와 상위 864건 내 탐지 수를 동시에 표시한다. 연결망은 비교 설계 장에서만 사용하는 구조 설명용 그림이다.
 
-실행: 이 폴더에서 `python -m http.server 8000` 후 http://localhost:8000 접속.
-검증: `node test.js`. 저장소 루트에서 `node site-check.cjs`로 실제 화면을 검사한다(로컬 Chrome과 설치된 Playwright 사용). `SITE_URL`을 지정하면 배포된 사이트도 같은 방식으로 검사한다.
+로봇 내용은 `notes/2026-10-07-modern-robotics.md`의 실제 질문과 수정 과정을 바탕으로 한다. 데모는 이 사이트에서 만든 이상적 평면 2R 기구학이다. 링크 길이는 각각 1, 두 번째 관절각은 첫 링크에 대한 상대각이다. 하나의 각도 입력이 로봇 자세와 C-space 좌표를 함께 갱신한다. 관절 제한·충돌·동역학은 포함하지 않는다. 설명의 공식 근거와 상세 학습 기록은 페이지에서 연결한다.
 
-Vercel: 저장소 `yeah-genie/PhysicalAI`, Root Directory `web`, Framework Preset `Other`, Build Command 없음, Output Directory `.`. 저장소 루트에서 연결된 프로젝트에 `vercel --prod`로 배포한다. `.vercel`과 환경 파일은 커밋하지 않는다.
+## 화면과 접근성
+
+1180×660 이상에서는 1280×720 설계 화면을 비례 확대·축소해 발표한다. 그보다 좁거나 낮은 창은 고정 크기 글자를 가진 문서형으로 전환한다. 데모와 그림은 한 번만 생성하며 두 모드가 같은 내용을 사용한다.
+
+스크롤·목차·이전/다음·방향키로 이동한다. 장별 해시 링크도 지원한다. 시스템의 움직임 줄이기 설정과 화면 버튼을 지원한다. AML 본문과 표는 JavaScript가 없어도 읽을 수 있다.
+
+## 실행과 검증
+
+이 폴더에서 `python -m http.server 8000`을 실행한다.
+
+- `node web/test.js` (저장소 루트): 공개 수치, 표의 막대 비율, 2R 길이·주기성, 내부 링크
+- `node site-check.cjs` (저장소 루트): 설치된 Chrome/Playwright로 발표 비율, 모든 장의 잘림, 낮은 창의 글자 크기, 320/390px 화면, 각도와 좌표, 키보드·앵커·움직임 설정 확인
+- `SITE_URL` 환경 변수를 지정하면 같은 검사를 공개 주소에서 실행한다.
+
+Vercel 프로젝트는 `yejin-signals-systems`, 저장소는 `yeah-genie/PhysicalAI`다. Root Directory는 `web`, Framework는 Other, Build Command는 없음, Output Directory는 `.`이다. 연결된 저장소 루트에서 `vercel --prod`로 배포한다. 환경 파일과 `.vercel`은 커밋하지 않는다.

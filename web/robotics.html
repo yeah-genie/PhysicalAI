@@ -1,1 +1,94 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Physical AI 학습 발표 및 학습·실험 기록"><title>Physical AI 학습 발표 — 나예진</title><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head><body class="deck-page robot"><a class="skip" href="#main">본문으로 이동</a><div id="deck-frame"><header class="deck-header"><a class="brand" href="index.html">YR<span> / SIGNALS & SYSTEMS</span></a><nav aria-label="프로젝트 메뉴"><a href="aml.html" >Financial AI</a><a href="robotics.html" aria-current=page>Physical AI</a><button class="motion-toggle" aria-pressed="false">움직임 줄이기</button></nav></header><aside class="slide-rail" aria-label="발표 목차"></aside><main id="main" class="deck" tabindex="-1"><section class="slide" data-title="학습 질문" data-scene="arm"><span class="ghost" aria-hidden="true">ROBOTICS</span><div class="slide-copy"><p class="eyebrow">PHYSICAL AI / LEARNING REPORT · 02</p><h1>로봇의 움직임을,<br><em>어떻게 표현할까?</em></h1><p class="lead">관절의 개수에서 configuration space까지.<br>Modern Robotics의 기본기를 쌓는 중입니다.</p><div class="chips"><span>기초 학습 중</span><span>Modern Robotics</span><span>2R 개념 데모</span></div><p class="byline">나예진 · 공부 → 작은 실습 → 프로젝트</p><p class="note">실물 제어·실패 감지 모델의 완성 보고가 아닌 학습 기록입니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="자유도와 자세" data-scene="arm"><span class="ghost" aria-hidden="true">CONFIGURATION</span><div class="slide-copy"><p class="eyebrow">01 / TWO ANGLES · ONE CONFIGURATION</p><h2>관절 각도 두 개가,<br><em>자세 하나를 정합니다.</em></h2><p class="lead">독립적인 회전 관절 두 개를 가진<br>평면 2R 로봇을 움직여 봅니다.</p><div class="joint-controls"><label for="theta1">θ₁ · 첫 번째 관절 <output id="theta1-value">35°</output></label><input type="range" id="theta1" min="0" max="360" value="35"><label for="theta2">θ₂ · 두 번째 관절 <output id="theta2-value">70°</output></label><input type="range" id="theta2" min="0" max="360" value="70"></div><div class="equation">q = (θ₁, θ₂)<br><span>θ₂는 첫 번째 링크에 대한 상대각입니다.</span></div><p class="note">이 사이트에서 새로 만든 길이 1·1의 개념 확인용 데모입니다. 실물 로봇의 동역학·충돌은 다루지 않습니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="C-space의 경계" data-scene="cspace"><span class="ghost" aria-hidden="true">C-SPACE</span><div class="slide-copy"><p class="eyebrow">02 / COORDINATES ARE NOT THE SPACE</p><h2>0°와 360°는,<br><em>같은 자세입니다.</em></h2><p class="lead">두 각도가 제한 없이 회전하는 이상적 2R 로봇에서는<br>C-space가 S¹ × S¹, 즉 토러스입니다.</p><div class="cards"><article><h3>좌표로 그리면 사각형</h3><p>각 축에 θ₁과 θ₂를 놓고 표현합니다.</p></article><article><h3>맞은편 경계는 연결</h3><p>각도를 한 바퀴 돌리면 같은 자세로 돌아옵니다.</p></article></div><button class="action" id="wrap-demo">0° ↔ 360° 비교하기</button><p id="wrap-result" class="note" aria-live="polite">좌표의 숫자가 달라도 로봇 자세는 같습니다.</p><p class="note">관절 제한과 장애물을 제외한 이상적 모델입니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="앞으로의 프로젝트" data-scene="roadmap"><span class="ghost" aria-hidden="true">NEXT</span><div class="slide-copy"><p class="eyebrow">03 / A TWO-YEAR JOURNEY</p><h2>이해하고, 작게 만들고,<br><em>결과를 남깁니다.</em></h2><div class="roadmap"><article><b>0–6개월</b><h3>기본기 · 인식</h3><p>Modern Robotics, ROS2, OpenCV</p></article><article><b>7–12개월</b><h3>로봇팔 · 이동로봇</h3><p>FK/IK, MoveIt, SLAM, Nav2</p></article><article><b>13–18개월</b><h3>학습 · 시뮬레이션</h3><p>BC/ACT, LeRobot, MuJoCo</p></article><article><b>19–24개월</b><h3>실패 감지 · 통합</h3><p>불확실성, 실패 예측, 회복</p></article></div><p class="note">현재는 첫 단계입니다. 이후 항목은 계획이며 완료된 프로젝트가 아닙니다.</p></div><div class="visual-slot"></div></section><section class="slide" data-title="학습 근거" data-scene="arm"><span class="ghost" aria-hidden="true">NOTES</span><div class="slide-copy"><p class="eyebrow">04 / SOURCES & STUDY NOTES</p><h2>배운 만큼,<br><em>근거를 남깁니다.</em></h2><p class="lead">매일의 공부는 GitHub에.<br>단원을 마치면 Velog에 종합합니다.</p><div class="links"><a href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/2-3-1-configuration-space-topology/">Modern Robotics · C-space 공식 설명 ↗</a><a href="https://velog.io/@rhadobby/관절을-세는-것만으로는-부족했다-자유도와-2R-로봇의-C-space">자유도와 2R 로봇 · 학습 기록 ↗</a><a href="https://github.com/yeah-genie/PhysicalAI/blob/master/ROADMAP.md">2년 로드맵 · GitHub ↗</a></div><p class="note">학습에서 만든 작은 실습을 이 발표 자료에 한 장씩 연결합니다.</p></div><div class="visual-slot"></div></section></main><div class="stage" aria-label="현재 장의 시각화"></div><div class="deck-footer"><span class="slide-progress" aria-live="polite"></span><span class="slide-name"></span><span class="keyboard-hint">SCROLL / ↑ ↓ · 한 장씩 읽기</span><button class="previous-slide" aria-label="이전 슬라이드">←</button><button class="next-slide" aria-label="다음 슬라이드">→</button></div></div></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="실제로 헷갈린 개념과 각도·자세를 연결하는 2R 학습 데모.">
+  <title>자유도와 C-space — 나예진</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body class="deck-page robot">
+<a class="skip" href="#main">본문으로 이동</a>
+<div id="deck-frame">
+<header class="header">
+  <a class="brand" href="index.html">나예진<span>학습 · 프로젝트</span></a>
+  <nav aria-label="주 메뉴">
+    <a href="aml.html" >AML</a>
+    <a href="robotics.html" aria-current="page">로봇</a>
+    <button class="motion-toggle" aria-pressed="false">움직임 줄이기</button>
+  </nav>
+</header>
+<main id="main" class="deck" tabindex="-1">
+<section class="slide" id="learning" data-title="공부한 내용">
+  <div class="slide-content">
+    <p class="chapter">01 / 공부한 내용</p>
+    <h1>자유도에서<br><em>로봇의 자세 공간까지.</em></h1>
+    <p class="lead">Modern Robotics 2.2–2.3.1을 공부하며<br>헷갈렸던 두 가지를 정리했습니다.</p>
+    <dl class="lessons">
+      <div><dt>관절 자유도의 합이 전체 자유도는 아니었습니다.</dt><dd>Stewart platform의 여러 다리는 같은 위판에 연결됩니다. 개별 관절의 운동 수와 조립된 기구의 독립적인 운동 수를 구분해야 했습니다.</dd></div>
+      <div><dt>토러스는 실제 로봇팔의 모양이 아니었습니다.</dt><dd>2R 로봇의 두 관절각 조합을 나타내는 공간입니다. 도넛 표면의 점 하나가 자세 하나에 대응합니다.</dd></div>
+    </dl>
+    <p class="source">현재 단계: 기초 개념 학습 · 회전 제한과 충돌이 없는 이상적 2R 모델</p>
+  </div>
+</section>
+<section class="slide" id="demo" data-title="각도와 자세">
+  <div class="slide-content">
+    <p class="chapter">02 / 각도와 자세</p>
+    <h2>두 각도가 정하는 <em>로봇의 자세.</em></h2>
+    <div class="demo-grid">
+      <div class="joint-controls">
+        <label for="theta1">첫 번째 관절 θ₁ <output id="theta1-value">35°</output></label>
+        <input id="theta1" type="range" min="0" max="360" value="35">
+        <label for="theta2">두 번째 관절 θ₂ <output id="theta2-value">70°</output></label>
+        <input id="theta2" type="range" min="0" max="360" value="70">
+        <p>θ₂는 첫 번째 링크에 대한 상대각입니다.</p>
+        <p class="hint">각도를 0°와 360°로 바꿔 보세요. 좌표는 반대편 경계에 있지만, 로봇 자세는 같습니다.</p>
+      </div>
+      <figure class="arm-figure">
+        <svg id="arm-svg" viewBox="0 0 440 440" role="img" aria-label="두 관절 각도에 따른 2R 로봇 자세">
+          <circle class="workspace-ring" cx="220" cy="220" r="180"/>
+          <path class="axis" d="M20 220H420M220 20V420"/>
+          <path id="arm-links" d="M220 220L294 168L270 81"/>
+          <circle class="joint" cx="220" cy="220" r="10"/>
+          <circle id="elbow" class="joint" cx="294" cy="168" r="8"/>
+          <circle id="tip" cx="270" cy="81" r="5"/>
+        </svg>
+        <figcaption>로봇 자세 <span id="tip-position">x = 0.56, y = 1.54</span></figcaption>
+      </figure>
+      <figure class="coordinate-figure">
+        <svg id="cspace-svg" viewBox="0 0 440 440" role="img" aria-label="두 관절각의 좌표. 사각형의 맞은편 경계는 같은 자세를 나타냅니다.">
+          <path class="coordinate-box" d="M60 60H380V380H60Z"/>
+          <path class="coordinate-grid" d="M60 220H380M220 60V380"/>
+          <circle id="configuration-point" cx="91" cy="318" r="7"/>
+          <g class="svg-label"><text x="60" y="410">0°</text><text x="350" y="410">360°</text><text x="210" y="435">θ₁</text><text x="20" y="230">θ₂</text><text x="10" y="65">360°</text></g>
+        </svg>
+        <figcaption>관절각의 좌표 <span id="configuration-label">q = (35°, 70°)</span></figcaption>
+      </figure>
+    </div>
+    <p class="note">두 링크의 길이는 각각 1입니다. 이 사이트에서 만든 기구학 개념 데모입니다.</p>
+  </div>
+</section>
+<section class="slide" id="next" data-title="다음 공부">
+  <div class="slide-content">
+    <p class="chapter">03 / 다음 공부</p>
+    <h2>이제는 좌표 표현을<br><em>더 정확히 이해하려 합니다.</em></h2>
+    <p class="lead">두 관절이 각각 한 바퀴 돌아 제자리로 오므로,<br>이상적 2R의 C-space는 S¹ × S¹, 토러스입니다.</p>
+    <p class="body-copy">다음에는 이 공간을 좌표로 표현하는 방법을 공부합니다.<br>학습 기록과 작은 실습을 쌓으며 ROS2 입문으로 이어갈 계획입니다.</p>
+    <div class="source-links">
+      <a href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/2-3-1-configuration-space-topology/">Modern Robotics 공식 강의 ↗</a>
+      <a href="https://velog.io/@rhadobby/관절을-세는-것만으로는-부족했다-자유도와-2R-로봇의-C-space">헷갈린 부분과 수정 과정 · Velog ↗</a>
+      <a href="https://github.com/yeah-genie/PhysicalAI/blob/master/ROADMAP.md">장기 학습 로드맵 ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="deck-footer">
+  <span class="slide-progress" aria-live="polite"></span>
+  <nav class="chapter-nav" aria-label="발표 목차"><a href="#learning">공부한 내용</a><a href="#demo">각도와 자세</a><a href="#next">다음 공부</a></nav>
+  <button class="previous-slide" aria-label="이전 장">←</button>
+  <button class="next-slide" aria-label="다음 장">→</button>
+</footer>
+</div>
+</body>
+</html>
