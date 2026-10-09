@@ -6,6 +6,7 @@ let reduced = preference.matches;
 function applyMotion() {
   document.body.classList.toggle('motion-reduced', reduced);
   motion?.setAttribute('aria-pressed', String(reduced));
+  document.dispatchEvent(new CustomEvent('motionchange', {detail: {reduced}}));
 }
 applyMotion();
 motion?.addEventListener('click', () => { reduced = !reduced; applyMotion(); });
@@ -52,6 +53,7 @@ if (slides.length) {
     document.querySelector('.slide-progress').textContent = `${index + 1} / ${slides.length} · ${slides[index].dataset.title}`;
     previous.disabled = index === 0;
     next.disabled = index === slides.length - 1;
+    document.dispatchEvent(new CustomEvent('deckchange', {detail: {index}}));
   }
   function current() {
     const bounds = deck.getBoundingClientRect();

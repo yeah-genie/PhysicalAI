@@ -4,3 +4,6 @@ site-preview/
 
 .vercel
 .env*
+notes/design-review/ack-2026-extracted.*
+notes/design-review/BIN0001.PNG
+.playwright-mcp/
