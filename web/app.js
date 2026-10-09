@@ -42,7 +42,8 @@ if (slides.length) {
   const chapterLinks = [...document.querySelectorAll('.chapter-nav a')];
   const previous = document.querySelector('.previous-slide');
   const next = document.querySelector('.next-slide');
-  const presentation = matchMedia('(min-width: 1180px) and (min-height: 660px)');
+  const presentation = frame.hasAttribute('data-fixed-deck') ? {matches: true}
+    : matchMedia('(min-width: 1180px) and (min-height: 660px)');
   let active = -1, pending = false;
 
   function update(index) {

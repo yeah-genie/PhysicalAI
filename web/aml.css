@@ -90,30 +90,36 @@ html:has(.cinematic) { background: #000; }
 .presentation .cinematic.has-network .scene-map { visibility: hidden; }
 .presentation .cinematic .is-active .slide-content { animation: none; }
 .presentation .cinematic .deck-footer::before { content: ''; position: absolute; left: 62px; right: 62px; top: 0; height: 1px; background: #ffffff20; }
-@media(max-width:800px) {
-  .cinematic .evidence { max-width: 640px; }
-  .cinematic h1 { font-size: 42px; }
-  .cinematic .slide h2 { font-size: 35px; }
-  .cinematic .header nav { gap: 18px; }
-}
-@media(max-width:540px) {
-  .cinematic .header nav { gap: 12px; }
-  .cinematic .motion-toggle { font-size: 10px; padding: 6px; }
-  .cinematic .brand { font-size: 16px; }
-  .cinematic .slide { padding: 48px 6%; }
-  .cinematic h1 { font-size: 37px; }
-  .cinematic .slide h2 { font-size: 32px; }
-  .cinematic .lead { font-size: 19px; }
-  .cinematic .narrative li, .cinematic .body-copy { font-size: 17px; }
-  .cinematic .chapter { margin-bottom: 19px; }
-  .cinematic .results-table th, .cinematic .results-table td { padding: 16px 5px; }
-  .cinematic .results-table tbody th { font-size: 15px; }
-  .cinematic .results-table td { font-size: 20px; }
-  .cinematic .results-table thead th { font-size: 12px; }
-  .cinematic .period-row { grid-template-columns: 78px 1fr 60px; gap: 10px; font-size: 14px; }
-  .cinematic .period-scale { margin-left: 88px; padding-right: 70px; }
-  .cinematic #period-summary dd { font-size: 27px; }
-  .cinematic .budget-row { font-size: 16px; }
-  .cinematic .budget-row strong { font-size: 23px; }
-  .cinematic .timeline { gap: 14px; }
-}
+
+/* AML is a proportional slide deck at every viewport size. */
+.cinematic .graph-controls { display:flex; gap:8px; margin:18px 0 12px; }
+.cinematic .graph-controls button, #flow-play { background:#071411; border:1px solid #38534d; color:#c3d8d2; padding:10px 14px; font:inherit; font-size:14px; border-radius:3px; cursor:pointer; }
+.cinematic .graph-controls button[aria-pressed=true] { background:#64e4cb; color:#06110e; border-color:#64e4cb; }
+.cinematic button:focus-visible { outline:2px solid white; outline-offset:4px; }
+.cinematic .graph-readout { color:#64e4cb; font-size:14px; min-height:22px; margin:0 0 12px; }
+.cinematic #flow-play { padding:6px 10px; margin:10px 12px 0 0; }
+.cinematic .orbit-hint { font-size:11px; color:#8caaa2; }
+.presentation .cinematic .scene-caption { left:572px; top:auto; bottom:82px; max-width:590px; }
+.presentation .cinematic .slide-content { gap:54px; }
+.presentation .cinematic #network-stage { left:470px; width:810px; height:590px; top:32px; }
+.presentation .cinematic .scene-map { width:650px; transform:translateX(-25px); }
+.presentation .cinematic .is-active .narrative { animation:aml-enter .55s ease-out both; }
+@keyframes aml-enter { from {opacity:0; transform:translateY(12px)} to {opacity:1;transform:none} }
+.cinematic.motion-reduced .is-active .narrative { animation:none; }
+.cinematic .source-links { display:flex; flex-wrap:wrap; gap:14px; }
+.cinematic .graph-readout:empty { display:none; }
+
+.presentation .cinematic .slide { position:relative; }
+.presentation .cinematic .slide-content { position:static; }
+.cinematic #approach .chapter { margin-bottom:16px; }
+.cinematic #approach h2 { font-size:39px; margin-bottom:18px; }
+.cinematic #approach .lead { margin-bottom:12px; line-height:1.5; }
+.cinematic #approach .narrative dl > div { padding:9px 0; }
+.cinematic #approach .source { margin-top:12px; }
+.cinematic #protocol .timeline { margin:18px 0; }
+.cinematic #protocol .lead { margin-bottom:14px; }
+.cinematic #protocol .body-copy { margin:12px 0; }
+.cinematic #protocol .source { margin-top:12px; }
+.presentation .cinematic .chapter-nav { display:flex; }
+.presentation .cinematic .brand span { display:inline; }
+.presentation .cinematic .source-links { flex-direction:row; }
