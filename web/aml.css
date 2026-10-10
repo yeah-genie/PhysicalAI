@@ -87,7 +87,7 @@ html:has(.cinematic) { background: #000; }
 .presentation .cinematic #network-stage { display: block; position: absolute; left: 495px; top: 22px; width: 795px; height: 654px; pointer-events: none; mask-image: linear-gradient(90deg,transparent,#000 10%); }
 .presentation .cinematic #network-stage canvas { display: block; width: 100%; height: 100%; }
 .presentation .cinematic .scene-map { grid-column: 2; margin: 0; }
-.presentation .cinematic.has-network .scene-map { visibility: hidden; }
+.presentation .cinematic.has-network #approach .scene-map { visibility: hidden; }
 .presentation .cinematic .is-active .slide-content { animation: none; }
 .presentation .cinematic .deck-footer::before { content: ''; position: absolute; left: 62px; right: 62px; top: 0; height: 1px; background: #ffffff20; }
 
@@ -156,3 +156,22 @@ html:has(.cinematic) { background: #000; }
 .cinematic:has(.chapter-divider.is-active) :focus-visible { outline-color:#14614b; }
 .cinematic:has(.chapter-divider.is-active) .chapter-nav a { color:#41675a; }
 .cinematic:has(.chapter-divider.is-active) .deck-footer button { color:#102b24; }
+
+/* Each chart answers the question on its own slide. */
+.cinematic #network-stage { visibility:hidden; }
+.cinematic:has(#approach.is-active) #network-stage { visibility:visible; }
+.cinematic .data-figure { position:relative; z-index:2; margin:0; width:100%; }
+.cinematic .data-chart { width:100%; }
+.cinematic .data-chart svg, .cinematic .data-chart img { display:block; width:100%; height:auto; }
+.cinematic .data-chart [data-point] { cursor:pointer; outline:none; }
+.cinematic .data-chart [data-point]:hover, .cinematic .data-chart [data-point]:focus-visible { stroke:#fff; stroke-width:2; }
+.cinematic .chart-readout { font-size:14px; line-height:1.65; color:#c3d8d2; min-height:48px; margin:12px 0 0; }
+.cinematic .data-figure .note { margin:6px 0 0; font-size:12px; }
+.cinematic .interaction-hint { color:var(--muted); font-size:15px; }
+.cinematic #protocol .data-chart { margin-top:8px; }
+.cinematic .next-experiments h3 { color:var(--accent); }
+.cinematic .next-experiments dl { margin:0; }
+.cinematic .next-experiments dl > div { border-top:1px solid #34544a; padding:24px 0; }
+.cinematic .next-experiments dt { font-size:24px; font-weight:500; margin-bottom:12px; }
+.cinematic .next-experiments dd { color:var(--muted); font-size:16px; line-height:1.6; }
+.presentation .cinematic .chapter-nav { gap:10px; }

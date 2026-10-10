@@ -18,3 +18,9 @@ CSV 라벨은 거래의 정답 라벨이며 계좌의 범죄 여부 또는 모�
 거래 ID의 숫자는 헤더를 제외한 1부터 시작하는 원본 데이터 행 번호이다.
 전체 요약, 추출 기준, 원본 SHA-256은 transactions.json에 기록했다.
 추출 스크립트: 저장소 scripts/build-aml-visualization.py
+
+overview.json은 같은 원본 파일을 전체 스캔하여 날짜·시간별 거래/양성 건수와
+결제 방식별 거래/양성 건수만 집계한 파생 데이터이다. 계좌 식별자는 포함하지 않는다.
+이 집계에도 위의 출처와 CDLA-Sharing-1.0 라이선스가 적용된다.
+transactions-*.svg는 같은 집계와 부분망을 표시하는 정적 대체 이미지이며,
+scripts/build-aml-chart-assets.mjs로 다시 생성할 수 있다.

@@ -18,7 +18,7 @@ for (const [i, match] of budgetRows.entries()) {
   assert.ok(Math.abs(width - detected / 864 * 100) < .001);
 }
 assert.deepEqual([...aml.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(m => m[1]),
-  ['question','agenda','section-method','approach','protocol','section-results','results','budget','section-analysis','shift','section-next','lessons']);
+  ['question','agenda','section-method','approach','protocol','section-results','results','budget','section-analysis','population','shift','formats','section-next','lessons']);
 assert.deepEqual(planar2R(0, 0), {elbow:[1,0], tip:[2,0]});
 for (const [a,b] of [[35,70], [90,90], [0,180], [360,70], [270,0]]) {
   const {elbow,tip} = planar2R(a,b);
@@ -35,4 +35,4 @@ for (const file of ['index.html','aml.html','robotics.html']) {
   }
   for (const [,id] of html.matchAll(/href="#([^"]+)"/g)) assert.ok(html.includes(`id="${id}"`), `${file}: #${id}`);
 }
-console.log('PASS: 12 AML slides, paper AP/alert counts and fixed-budget proportions, 2R geometry and periodicity, page links');
+console.log('PASS: 14 AML slides, paper AP/alert counts and fixed-budget proportions, 2R geometry and periodicity, page links');

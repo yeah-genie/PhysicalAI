@@ -37,6 +37,7 @@ def retain_latest(heap, item, limit=FANOUT):
 
 def build(path, output):
     daily = defaultdict(lambda: [0, 0])
+    hourly, format_labels = defaultdict(lambda: [0, 0]), Counter()
     accounts, currencies, formats = set(), Counter(), Counter()
     positive = self_transactions = total = 0
     candidates = []
@@ -48,10 +49,13 @@ def build(path, output):
         day = row[0][:10].replace('/', '-')
         daily[day][0] += 1
         daily[day][1] += label
+        hourly[row[0][:13].replace('/', '-')][0] += 1
+        hourly[row[0][:13].replace('/', '-')][1] += label
         accounts.update((sender(row), recipient(row)))
         self_transactions += sender(row) == recipient(row)
         currencies[row[6]] += 1
         formats[row[9]] += 1
+        format_labels[row[9]] += label
         if day == '2022-09-09' and label and sender(row) != recipient(row):
             candidates.append((row[0], number, row))
     candidates = sorted(candidates)[:128]
@@ -130,6 +134,8 @@ def build(path, output):
     assert len({e['row'] for e in edges}) == len(edges)
     assert sum(v[0] for v in daily.values()) == total
     assert sum(v[1] for v in daily.values()) == positive
+    assert sum(v[0] for v in hourly.values()) == total
+    assert sum(v[1] for v in hourly.values()) == sum(format_labels.values()) == positive
     # Independent reread protects row provenance and duplicate Account column handling.
     verified = 0
     for number, row in rows(path):
@@ -157,6 +163,10 @@ def build(path, output):
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
+    overview = dict(source=data['source'], transactions=total, positiveTransactions=positive,
+                    hourly=dict(sorted(hourly.items())),
+                    formats={name: [count, format_labels[name]] for name, count in formats.items()})
+    output.with_name('overview.json').write_text(json.dumps(overview, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     print('Selected subset:', len(nodes), 'accounts,', len(edges), 'transactions; focal', focal_number, cutoff, flush=True)
     print('SHA256:', digest.hexdigest(), flush=True)
 

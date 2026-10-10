@@ -32,20 +32,22 @@
       <h1>거래 한 건에서,<br>연결된 거래로.</h1>
       <p class="lead">금액과 시간에 계좌의 관계를 더하면,<br>드문 자금세탁 거래를 더 잘 찾을까?</p>
       <p class="body-copy">거래 특징 모델과 그래프 신경망을<br>같은 데이터에서 비교한 예비 연구.</p>
-      <div class="graph-controls"><button data-view="all" aria-pressed="true">거래망 전체</button><button data-view="target" aria-pressed="false">한 거래로 접근</button></div>
+      <p class="body-copy interaction-hint">오른쪽의 시간 칸을 선택하면<br>실제 거래 수와 양성 라벨 수를 확인합니다.</p>
       <p class="source">IBM AML HI-Small 합성 데이터<br>전체 5,078,345건 · 자금세탁 라벨 약 0.10%<br>나예진 · 권범 / 2026 연구 원고</p>
     </div>
-    <figure class="scene-map"><img src="assets/network-overview.svg" width="600" height="420" alt="많은 계좌와 거래 사이에서 A에서 B로 향하는 거래에 초점을 맞춘 실제 CSV에서 추출한 계좌망"></figure>
-    <p class="scene-caption"><strong>점은 계좌, 선은 계좌 사이의 거래.</strong>원본 CSV에서 추출한 26계좌 · 48거래. 청록은 대상 거래이며 모델 예측이 아닙니다.<br><button id="flow-play">송금 방향 보기</button><span class="orbit-hint">드래그 회전 · Shift+휠 확대 · 더블클릭 복원</span></p>
+    <figure class="data-figure">
+      <div id="hourly-chart" class="data-chart"><img src="assets/transactions-hourly.svg" width="650" height="440" alt="9월 1일부터 18일까지 날짜와 시간별 실제 거래량. 9월 11일 이후 거래량이 크게 감소합니다."></div>
+      <figcaption id="hourly-chart-readout" class="chart-readout" aria-live="polite">한 칸은 1시간 집계입니다. 칸 선택 · 방향키로 이동.</figcaption>
+    </figure>
   </div>
 </section>
 <section class="slide agenda-slide" id="agenda" data-title="목차" data-graph-shot="3">
   <div class="slide-content">
     <div class="narrative"><p class="chapter">발표 순서</p><h2>한 거래에서 시작해,<br>결과를 다시 들여다봅니다.</h2><p class="lead">무엇을 비교했고, 무엇을 확인했는지.</p></div>
     <nav class="agenda" aria-label="장별 바로가기">
-      <button data-slide-target="section-method"><span>01</span><strong>연구 설계</strong><small>거래 특징 · 계좌 관계 · 시간 기준</small></button>
+      <button data-slide-target="section-method"><span>01</span><strong>연구 설계</strong><small>거래 특징 → 계좌 관계 → 시간 기준</small></button>
       <button data-slide-target="section-results"><span>02</span><strong>1차 성과</strong><small>네 모델의 AP · 같은 조사량에서의 비교</small></button>
-      <button data-slide-target="section-analysis"><span>03</span><strong>추가 분석</strong><small>기간별 분포 · 결과 해석</small></button>
+      <button data-slide-target="section-analysis"><span>03</span><strong>추가 분석</strong><small>날짜별 분포 · 성능 해석 · 결제 방식</small></button>
       <button data-slide-target="section-next"><span>04</span><strong>다음 단계</strong><small>비교의 한계 · 후속 검증</small></button>
     </nav>
   </div>
@@ -70,7 +72,7 @@
       <p class="source">GIN: GINEConv · PNA: 평균·최대·최소·표준편차 집계.<br>노드 입력은 상수 · 계좌 ID 임베딩 없음.</p>
     </div>
     <figure class="scene-map"><img src="assets/network-neighbors.svg" width="600" height="420" alt="대상 거래 A001에서 A002와 각 계좌로 들어오는 1층 및 2층 이웃 거래. 화살표는 송금에서 수취 방향"></figure>
-    <p class="scene-caption"><strong>주변 정보는 수취 방향으로 모입니다.</strong><span id="transaction-detail"></span><br>표시용 최근 8개 이웃 추출 · 학습의 층별 최대 10개 샘플링과 구분.</p>
+    <p class="scene-caption"><strong>2-hop 이웃 → 1-hop 이웃 → 대상 계좌.</strong><span id="transaction-detail"></span><br>표시용 최근 8개 이웃 · 학습의 최대 10개 샘플링과 구분.<br><button id="flow-play">대상 거래 방향 보기</button><span class="orbit-hint">드래그 회전 · Shift+휠 확대</span></p>
   </div>
 </section>
 <section class="slide" id="protocol" data-graph-shot="2" data-title="평가 원칙">
@@ -88,8 +90,11 @@
       <div class="graph-controls"><button id="future-toggle" aria-pressed="false">미래 연결 함께 보기</button></div><p id="time-readout" class="graph-readout" aria-live="polite"></p>
       <p class="source">2022년 9월 데이터 · 동일 시각 이웃은 허용.<br>실제 운영에서의 정보 가용성은 별도 검증 대상.</p>
     </div>
-    <figure class="scene-map"><img src="assets/network-time.svg" width="600" height="420" alt="대상 시각 이하의 이웃 거래만 사용하며 t 이후의 거래는 점선으로 구분하여 제외한 도해"></figure>
-    <p class="scene-caption"><strong>아직 발생하지 않은 거래는 입력에서 제외.</strong>기준 시각 2022.09.09 01:54 · 점선은 이후 거래. 금액·시각·라벨은 CSV 원본값.</p>
+    <figure class="data-figure">
+      <div id="timeline-chart" class="data-chart"><img src="assets/transactions-timeline.svg" width="650" height="440" alt="수신 계좌별 거래 타임라인. 9월 9일 01:54 대상 시각 이후의 거래는 입력에서 제외합니다."></div>
+      <figcaption id="timeline-chart-readout" class="chart-readout" aria-live="polite">점을 선택해 거래 시각·금액·통화·CSV 라벨을 확인하세요.</figcaption>
+      <p class="note">관계 설명용 부분망입니다. 동일 자금의 이동 경로를 뜻하지 않습니다.</p>
+    </figure>
   </div>
 </section>
 <section class="slide chapter-divider" id="section-results" data-title="1차 성과" data-graph-shot="3">
@@ -146,9 +151,24 @@
 </section>
 <section class="slide chapter-divider" id="section-analysis" data-title="추가 분석" data-graph-shot="3">
   <div class="slide-content"><div class="narrative">
-    <p class="chapter">03 / 04</p><h2>추가 분석</h2><p class="lead">전체 점수를 기간별로 나누어 보면.</p>
-    <button class="chapter-start" data-slide-target="shift">내용 보기 <span aria-hidden="true">→</span></button>
+    <p class="chapter">03 / 04</p><h2>추가 분석</h2><p class="lead">성능을 읽기 전에, 데이터의 분포부터.</p>
+    <button class="chapter-start" data-slide-target="population">내용 보기 <span aria-hidden="true">→</span></button>
   </div><span class="chapter-number" aria-hidden="true">03</span></div>
+</section>
+<section class="slide" id="population" data-title="날짜별 데이터" data-graph-shot="3">
+  <div class="slide-content">
+    <div class="narrative">
+      <p class="chapter">원본 CSV 전체 집계 · 추가 탐색</p>
+      <h2>거래는 줄었는데,<br>양성 비율은 커졌다.</h2>
+      <p class="lead">9월 11일부터 표본의 구성이<br>앞선 날짜와 크게 달라집니다.</p>
+      <p class="body-copy">위는 날짜별 거래 수, 아래는 양성률.<br>같은 날짜 축에서 두 변화를 읽습니다.<br>거래 수는 로그 축으로 표시했습니다.</p>
+      <p class="source">양성은 CSV의 자금세탁 라벨 1.<br>합성 데이터에서 관측한 분포이며 모델 예측이 아닙니다.</p>
+    </div>
+    <figure class="data-figure">
+      <div id="daily-chart" class="data-chart"><img src="assets/transactions-daily.svg" width="650" height="440" alt="같은 날짜 축에서 보는 로그 축 거래량과 선형 축 양성률. 9월 11일 이후 거래량은 감소하고 양성률은 높아집니다."></div>
+      <figcaption id="daily-chart-readout" class="chart-readout" aria-live="polite">날짜를 선택해 거래 수와 양성률을 확인하세요.</figcaption>
+    </figure>
+  </div>
 </section>
 <section class="slide" id="shift" data-graph-shot="5" data-title="기간별 해석">
   <div class="slide-content">
@@ -177,6 +197,21 @@
     </div>
   </div>
 </section>
+<section class="slide" id="formats" data-title="결제 방식 분포" data-graph-shot="3">
+  <div class="slide-content">
+    <div class="narrative">
+      <p class="chapter">원본 CSV 전체 집계 · 추가 탐색</p>
+      <h2>양성 라벨은<br>어디에 몰려 있을까?</h2>
+      <p class="lead">ACH는 전체 거래의 11.83%,<br>양성 라벨의 86.59%를 차지합니다.</p>
+      <p class="body-copy">두 막대는 서로 다른 집단의 구성비.<br>이 편중이 모델에 미치는 영향은<br>별도의 검증이 필요합니다.</p>
+      <p class="source">이 합성 파일의 관측 분포입니다.<br>실제 위험도·인과관계를 뜻하지 않습니다.</p>
+    </div>
+    <figure class="data-figure">
+      <div id="format-chart" class="data-chart"><img src="assets/transactions-formats.svg" width="650" height="440" alt="결제 방식별 전체 거래와 양성 라벨의 구성비 비교. ACH 전체 비중 11.83%, 양성 라벨 비중 86.59%."></div>
+      <figcaption id="format-chart-readout" class="chart-readout" aria-live="polite">방식을 선택해 건수와 그 방식 안의 양성률을 확인하세요.</figcaption>
+    </figure>
+  </div>
+</section>
 <section class="slide chapter-divider" id="section-next" data-title="다음 단계" data-graph-shot="3">
   <div class="slide-content"><div class="narrative">
     <p class="chapter">04 / 04</p><h2>다음 단계</h2><p class="lead">확인한 결과에서, 더 엄밀한 비교로.</p>
@@ -190,18 +225,24 @@
       <h2>결과는 확인했다.<br>원인은 더 검증해야 한다.</h2>
       <p class="lead">이 조건에서는 PNA가 앞섰습니다.<br>집계 방식만의 효과로 볼 수는 없습니다.</p>
       <p class="body-copy">PNA의 파라미터는 GIN의 약 4.4배.<br>학습·탐색 예산도 같지 않았습니다.</p>
-      <p class="body-copy">다음은 규모와 예산을 맞춘 비교,<br>여러 초기값의 반복, 별도 자료에서의 평가.</p>
-      <p class="source">합성 데이터 · 단일 실행의 예비 비교.<br>원고: 「IBM AML 합성 데이터에서 거래 특징 기반 모델과<br>그래프 신경망의 자금세탁 거래 탐지 성능 비교」</p>
+      <p class="source">2026 연구 원고 기반.<br>합성 데이터 · 단일 실행의 예비 비교.</p>
       <div class="source-links"><a href="https://velog.io/@rhadobby/거래-한-건만-볼까-관계까지-볼까-AML-딥러닝-과제-기록">실험 기록 읽기 ↗</a><a href="data/NOTICE.md">시각화 데이터·출처 ↗</a></div>
     </div>
-    <figure class="scene-map"><img src="assets/network-overview.svg" width="600" height="420" alt="연구의 출발점이었던 A에서 B로 향하는 거래와 전체 계좌 관계"></figure>
-    <p class="scene-caption"><strong>한 거래의 점수에서, 평가 조건의 이해까지.</strong>다음 실험은 이 연결을 더 엄밀하게 확인하는 과정입니다.</p>
+    <div class="evidence next-experiments">
+      <h3>다음 실험에서 확인할 세 가지</h3>
+      <dl>
+        <div><dt>집계 방식의 효과인가?</dt><dd>파라미터 수와 학습·탐색 예산을 맞춘 비교.</dd></div>
+        <div><dt>다시 실행해도 유지되는가?</dt><dd>여러 초기값의 반복과 결과의 변동 폭 확인.</dd></div>
+        <div><dt>분포가 바뀌어도 유지되는가?</dt><dd>기간·결제 방식별 평가와 별도 자료 검증.</dd></div>
+      </dl>
+      <p class="note">후속 실험 계획 · 아직 수행한 결과가 아닙니다.</p>
+    </div>
   </div>
 </section>
 </main>
 <footer class="deck-footer">
   <span class="slide-progress" aria-live="polite"></span>
-  <nav class="chapter-nav" aria-label="발표 목차"><a href="#question">표지</a><a href="#agenda">목차</a><a href="#section-method">설계</a><a href="#approach">입력</a><a href="#protocol">평가</a><a href="#section-results">1차 성과</a><a href="#results">결과</a><a href="#budget">조사량</a><a href="#section-analysis">추가 분석</a><a href="#shift">분포</a><a href="#section-next">다음 단계</a><a href="#lessons">결론</a></nav>
+  <nav class="chapter-nav" aria-label="발표 목차"><a href="#question">표지</a><a href="#agenda">목차</a><a href="#section-method">설계</a><a href="#approach">입력</a><a href="#protocol">평가</a><a href="#section-results">1차 성과</a><a href="#results">결과</a><a href="#budget">조사량</a><a href="#section-analysis">추가 분석</a><a href="#population">날짜</a><a href="#shift">해석</a><a href="#formats">결제</a><a href="#section-next">다음 단계</a><a href="#lessons">결론</a></nav>
   <button class="previous-slide" aria-label="이전 장">←</button>
   <button class="next-slide" aria-label="다음 장">→</button>
 </footer>
