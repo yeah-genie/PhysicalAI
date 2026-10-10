@@ -21,7 +21,7 @@ document.querySelector('#flow-play').addEventListener('click', () => {
   focused = true; update(); graph?.pulse();
   document.querySelector('#flow-play').textContent = 'A001 → A002 · 송금 방향';
 });
-document.addEventListener('deckchange', e => {index = e.detail.index; graph?.resetOrbit(); update();});
+document.addEventListener('deckchange', e => {index = Number(document.querySelectorAll('.slide')[e.detail.index].dataset.graphShot); graph?.resetOrbit(); update();});
 document.addEventListener('motionchange', () => graph?.show(index, true));
 document.addEventListener('visibilitychange', () => document.hidden ? graph?.stop() : graph?.show(index, true));
 
@@ -49,7 +49,7 @@ async function load() {
     if (!Array.isArray(data.nodes) || !Array.isArray(data.edges) || data.edges.some(e => !data.nodes[e.source] || !data.nodes[e.target])) throw Error('거래 연결 데이터가 올바르지 않습니다.');
     const target = data.edges.find(e => e.phase === 'target');
     document.querySelector('#transaction-detail').textContent = `A001 → A002 · ${target.timestamp} · ${Number(target.amountReceived).toLocaleString('en-US',{minimumFractionDigits:2})} ${target.currency} · CSV 라벨 ${target.label}`;
-    index = Math.max(0,[...document.querySelectorAll('.slide')].findIndex(s=>s.classList.contains('is-active')));
+    index = Number(document.querySelector('.slide.is-active')?.dataset.graphShot || 0);
     update();
     try { graph = createGraph(await import('./vendor/three/three.module.js')); graph.show(index,true); }
     catch(error) { stage.replaceChildren(); document.body.classList.remove('has-network'); console.warn('2D 거래망으로 표시합니다.',error.message); }

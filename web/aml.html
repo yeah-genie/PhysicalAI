@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="aml.css">
   <script type="module" src="app.js"></script>
   <script type="module" src="aml-scene.js"></script>
+  <script type="module" src="aml-presentation.js"></script>
 </head>
 <body class="deck-page finance cinematic">
 <a class="skip" href="#main">본문으로 이동</a>
@@ -24,7 +25,7 @@
 </header>
 <div id="network-stage" aria-hidden="true"></div>
 <main id="main" class="deck" tabindex="-1">
-<section class="slide" id="question" data-title="연구 질문">
+<section class="slide" id="question" data-graph-shot="0" data-title="연구 질문">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">자금세탁 거래 탐지 · 연구 소개</p>
@@ -38,7 +39,24 @@
     <p class="scene-caption"><strong>점은 계좌, 선은 계좌 사이의 거래.</strong>원본 CSV에서 추출한 26계좌 · 48거래. 청록은 대상 거래이며 모델 예측이 아닙니다.<br><button id="flow-play">송금 방향 보기</button><span class="orbit-hint">드래그 회전 · Shift+휠 확대 · 더블클릭 복원</span></p>
   </div>
 </section>
-<section class="slide" id="approach" data-title="입력과 관계">
+<section class="slide agenda-slide" id="agenda" data-title="목차" data-graph-shot="3">
+  <div class="slide-content">
+    <div class="narrative"><p class="chapter">발표 순서</p><h2>한 거래에서 시작해,<br>결과를 다시 들여다봅니다.</h2><p class="lead">무엇을 비교했고, 무엇을 확인했는지.</p></div>
+    <nav class="agenda" aria-label="장별 바로가기">
+      <button data-slide-target="section-method"><span>01</span><strong>연구 설계</strong><small>거래 특징 · 계좌 관계 · 시간 기준</small></button>
+      <button data-slide-target="section-results"><span>02</span><strong>1차 성과</strong><small>네 모델의 AP · 같은 조사량에서의 비교</small></button>
+      <button data-slide-target="section-analysis"><span>03</span><strong>추가 분석</strong><small>기간별 분포 · 결과 해석</small></button>
+      <button data-slide-target="section-next"><span>04</span><strong>다음 단계</strong><small>비교의 한계 · 후속 검증</small></button>
+    </nav>
+  </div>
+</section>
+<section class="slide chapter-divider" id="section-method" data-title="연구 설계" data-graph-shot="3">
+  <div class="slide-content"><div class="narrative">
+    <p class="chapter">01 / 04</p><h2>연구 설계</h2><p class="lead">같은 거래에, 어떤 정보를 더했는가.</p>
+    <button class="chapter-start" data-slide-target="approach">내용 보기 <span aria-hidden="true">→</span></button>
+  </div><span class="chapter-number" aria-hidden="true">01</span></div>
+</section>
+<section class="slide" id="approach" data-graph-shot="1" data-title="입력과 관계">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">무엇을 모델에 보여줬는가</p>
@@ -55,7 +73,7 @@
     <p class="scene-caption"><strong>주변 정보는 수취 방향으로 모입니다.</strong><span id="transaction-detail"></span><br>표시용 최근 8개 이웃 추출 · 학습의 층별 최대 10개 샘플링과 구분.</p>
   </div>
 </section>
-<section class="slide" id="protocol" data-title="평가 원칙">
+<section class="slide" id="protocol" data-graph-shot="2" data-title="평가 원칙">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">평가에 앞서 고정한 조건</p>
@@ -74,7 +92,13 @@
     <p class="scene-caption"><strong>아직 발생하지 않은 거래는 입력에서 제외.</strong>기준 시각 2022.09.09 01:54 · 점선은 이후 거래. 금액·시각·라벨은 CSV 원본값.</p>
   </div>
 </section>
-<section class="slide" id="results" data-title="전체 결과">
+<section class="slide chapter-divider" id="section-results" data-title="1차 성과" data-graph-shot="3">
+  <div class="slide-content"><div class="narrative">
+    <p class="chapter">02 / 04</p><h2>1차 성과</h2><p class="lead">네 모델의 비교에서 확인한 결과.</p>
+    <button class="chapter-start" data-slide-target="results">내용 보기 <span aria-hidden="true">→</span></button>
+  </div><span class="chapter-number" aria-hidden="true">02</span></div>
+</section>
+<section class="slide" id="results" data-graph-shot="3" data-title="전체 결과">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">테스트 863,900건에서의 비교</p>
@@ -98,7 +122,7 @@
     </div>
   </div>
 </section>
-<section class="slide" id="budget" data-title="같은 조사량">
+<section class="slide" id="budget" data-graph-shot="4" data-title="같은 조사량">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">조사할 거래 수를 고정하면</p>
@@ -120,7 +144,13 @@
     </figure>
   </div>
 </section>
-<section class="slide" id="shift" data-title="기간별 해석">
+<section class="slide chapter-divider" id="section-analysis" data-title="추가 분석" data-graph-shot="3">
+  <div class="slide-content"><div class="narrative">
+    <p class="chapter">03 / 04</p><h2>추가 분석</h2><p class="lead">전체 점수를 기간별로 나누어 보면.</p>
+    <button class="chapter-start" data-slide-target="shift">내용 보기 <span aria-hidden="true">→</span></button>
+  </div><span class="chapter-number" aria-hidden="true">03</span></div>
+</section>
+<section class="slide" id="shift" data-graph-shot="5" data-title="기간별 해석">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">전체 평균을 다시 들여다보니</p>
@@ -147,7 +177,13 @@
     </div>
   </div>
 </section>
-<section class="slide" id="lessons" data-title="결론">
+<section class="slide chapter-divider" id="section-next" data-title="다음 단계" data-graph-shot="3">
+  <div class="slide-content"><div class="narrative">
+    <p class="chapter">04 / 04</p><h2>다음 단계</h2><p class="lead">확인한 결과에서, 더 엄밀한 비교로.</p>
+    <button class="chapter-start" data-slide-target="lessons">내용 보기 <span aria-hidden="true">→</span></button>
+  </div><span class="chapter-number" aria-hidden="true">04</span></div>
+</section>
+<section class="slide" id="lessons" data-graph-shot="6" data-title="결론">
   <div class="slide-content">
     <div class="narrative">
       <p class="chapter">이번 비교가 말해주는 것</p>
@@ -165,7 +201,7 @@
 </main>
 <footer class="deck-footer">
   <span class="slide-progress" aria-live="polite"></span>
-  <nav class="chapter-nav" aria-label="발표 목차"><a href="#question">질문</a><a href="#approach">입력</a><a href="#protocol">평가</a><a href="#results">결과</a><a href="#budget">조사량</a><a href="#shift">분포</a><a href="#lessons">결론</a></nav>
+  <nav class="chapter-nav" aria-label="발표 목차"><a href="#question">표지</a><a href="#agenda">목차</a><a href="#section-method">설계</a><a href="#approach">입력</a><a href="#protocol">평가</a><a href="#section-results">1차 성과</a><a href="#results">결과</a><a href="#budget">조사량</a><a href="#section-analysis">추가 분석</a><a href="#shift">분포</a><a href="#section-next">다음 단계</a><a href="#lessons">결론</a></nav>
   <button class="previous-slide" aria-label="이전 장">←</button>
   <button class="next-slide" aria-label="다음 장">→</button>
 </footer>

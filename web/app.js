@@ -73,7 +73,7 @@ if (slides.length) {
     document.documentElement.classList.toggle('presentation', presentation.matches);
     frame.style.transform = presentation.matches
       ? `translate(-50%,-50%) scale(${Math.min(innerWidth / 1280, innerHeight / 720)})` : '';
-    if (changed && active >= 0) go(active, true);
+    if (active >= 0 && (changed || frame.hasAttribute('data-fixed-deck'))) go(active, true);
     current();
   }
   const onScroll = () => {

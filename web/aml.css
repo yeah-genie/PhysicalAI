@@ -123,3 +123,36 @@ html:has(.cinematic) { background: #000; }
 .presentation .cinematic .chapter-nav { display:flex; }
 .presentation .cinematic .brand span { display:inline; }
 .presentation .cinematic .source-links { flex-direction:row; }
+
+/* Chapter breaks keep the deck rhythm while all content remains in the DOM. */
+.presentation .cinematic .chapter-nav { gap:13px; font-size:11px; }
+.cinematic .typing-visual { white-space:normal; }
+.cinematic .typed-char { position:relative; }
+.cinematic .is-typing .typing-caret::after { content:''; position:absolute; height:.85em; width:2px; background:var(--accent); right:-3px; top:.12em; animation:typing-blink .5s steps(1) infinite; }
+@keyframes typing-blink { 50% { opacity:0; } }
+.presentation .cinematic .agenda-slide .slide-content { grid-template-columns:460px 1fr; gap:90px; }
+.cinematic .agenda { position:relative; z-index:2; display:grid; width:100%; }
+.cinematic .agenda button { display:grid; grid-template-columns:44px 1fr; gap:6px 15px; text-align:left; border:0; border-bottom:1px solid #34544a; background:transparent; color:var(--ink); padding:22px 0; cursor:pointer; }
+.cinematic .agenda button span { grid-row:1/3; color:var(--accent); font-size:16px; padding-top:5px; }
+.cinematic .agenda button strong { font-size:28px; font-weight:550; }
+.cinematic .agenda button small { color:var(--muted); font-size:15px; }
+.cinematic .agenda button:hover strong { color:var(--accent); }
+.presentation .cinematic .chapter-divider { background:#e7fff5; color:#102b24; }
+.presentation .cinematic .chapter-divider .slide-content { display:block; }
+.cinematic .chapter-divider .narrative { max-width:720px; }
+.cinematic .chapter-divider .chapter { color:#41675a; font-size:17px; margin-bottom:34px; }
+.cinematic .chapter-divider h2 { font-size:104px; font-weight:600; letter-spacing:-5px; margin-bottom:30px; }
+.cinematic .chapter-divider .lead { font-size:25px; color:#305246; }
+.cinematic .chapter-start { margin-top:20px; padding:13px 0; border:0; border-bottom:1px solid #305246; background:none; color:#102b24; font-size:17px; }
+.cinematic .chapter-start span { margin-left:45px; }
+.cinematic .chapter-number { position:absolute; right:60px; top:105px; font-size:330px; font-weight:650; line-height:1; letter-spacing:-20px; color:transparent; -webkit-text-stroke:1px #b2d7c7; pointer-events:none; }
+.cinematic .chapter-divider .typing-caret::after { background:#102b24; }
+.cinematic:has(.chapter-divider.is-active) #network-stage, .cinematic:has(.agenda-slide.is-active) #network-stage { visibility:hidden; }
+.presentation .cinematic:has(.chapter-divider.is-active) .header, .presentation .cinematic:has(.chapter-divider.is-active) .deck-footer { background:#e7fff5; color:#102b24; }
+.cinematic:has(.chapter-divider.is-active) .brand span, .cinematic:has(.chapter-divider.is-active) .motion-toggle, .cinematic:has(.chapter-divider.is-active) .slide-progress { color:#41675a; }
+.cinematic:has(.chapter-divider.is-active) .header [aria-current=page], .cinematic:has(.chapter-divider.is-active) .chapter-nav a[aria-current=true] { color:#14614b; }
+.cinematic:has(.chapter-divider.is-active) .deck-footer button, .cinematic:has(.chapter-divider.is-active) .motion-toggle { border-color:#a2c7b8; }
+.cinematic:has(.chapter-divider.is-active) .deck-footer::before { background:#b2d7c7; }
+.cinematic:has(.chapter-divider.is-active) :focus-visible { outline-color:#14614b; }
+.cinematic:has(.chapter-divider.is-active) .chapter-nav a { color:#41675a; }
+.cinematic:has(.chapter-divider.is-active) .deck-footer button { color:#102b24; }
