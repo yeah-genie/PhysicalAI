@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "codexThreadId": "01a1117e-fb11-7393-9529-0c2a3b2120ec",
+  "firstWorkDateKST": "2026-10-13",
+  "logPath": "worklogs/2026-10-13.md",
+  "processedTurnIds": ["01a1310a-4a99-71c0-b327-c0a56a93e79c"],
+  "documentedWorkCommits": ["34a7c6136128f231b4a9754354eeab2aa091f776"],
+  "gitCheckpoint": "34a7c6136128f231b4a9754354eeab2aa091f776",
+  "partiallyProcessedTurn": {
+    "id": "01a13115-6db3-7843-82a8-f8495be47b10",
+    "recorded": ["Codex work-log automation update", "literature analysis and proposed experiment"],
+    "remaining": "Recheck completed turn and commit outcome; supplement only genuinely new verified work, not repeated final summaries."
+  },
+  "exclude": ["heartbeat checks without changes", "commits changing only logs/worklogs/tracking state", "private unrelated conversation", "unverified learning completion"]
+}

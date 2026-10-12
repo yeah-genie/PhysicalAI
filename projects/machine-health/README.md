@@ -2,6 +2,8 @@
 
 제조업을 처음 접한다면 [데이터·도메인 입문 설명](DATA-GUIDE.md)부터 읽는다.
 
+관련 논문과 차별화할 실험은 [문헌 분석](LITERATURE.md)에 정리했다. 초기 질문은 같은 모델에서 정상 자료 수·환경 변화가 고정 임곗값의 오탐과 경보 안정성에 미치는 영향이다.
+
 장기 질문: 운전 환경이나 소음이 달라져도 정상 설비에 과도한 경보를 내지 않고 이상을 찾을 수 있는가?
 
 첫 단계는 신호와 데이터 분할을 이해하는 것이다. [DCASE 2025 Task 2](https://dcase.community/challenge2025/task-first-shot-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring)의 fan 데이터를 사용한다. 원본은 [Zenodo 15097779](https://zenodo.org/records/15097779), CC BY-NC-SA 4.0이다. 공식 정상 학습 소리는 source 990개, target 10개이며 테스트는 두 환경 각각 정상 50개·이상 50개다.
