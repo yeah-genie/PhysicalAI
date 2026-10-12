@@ -1,0 +1,45 @@
+{
+  "source": "https://media.vorausrobotik.com/voraus-ad-dataset-100hz.parquet",
+  "license": "CC-BY-NC-SA-4.0",
+  "sourceCycles": 2122,
+  "transferredBytes": 36439233,
+  "selectedCycles": [
+    {
+      "sample": 0,
+      "anomaly": true,
+      "category": 0,
+      "setting": 0,
+      "rows": 1096,
+      "durationSeconds": 11.02536392211914,
+      "medianIntervalSeconds": 0.010068178176879883
+    },
+    {
+      "sample": 1,
+      "anomaly": true,
+      "category": 0,
+      "setting": 0,
+      "rows": 1110,
+      "durationSeconds": 11.16513204574585,
+      "medianIntervalSeconds": 0.010066032409667969
+    },
+    {
+      "sample": 755,
+      "anomaly": false,
+      "category": 12,
+      "setting": 72,
+      "rows": 1069,
+      "durationSeconds": 10.753396987915039,
+      "medianIntervalSeconds": 0.010067939758300781
+    },
+    {
+      "sample": 756,
+      "anomaly": false,
+      "category": 12,
+      "setting": 72,
+      "rows": 1055,
+      "durationSeconds": 10.610780954360962,
+      "medianIntervalSeconds": 0.010066032409667969
+    }
+  ],
+  "note": "Source units not converted. Cycle labels are not failure-onset labels. No model trained or benchmark evaluated."
+}
