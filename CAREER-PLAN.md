@@ -8,7 +8,7 @@
 
 | 방향 | 공고를 찾을 키워드 | 프로젝트에서 보여줄 증거 |
 |---|---|---|
-| 금융 | 데이터 분석, Data Scientist, FDS, Fraud, 리스크 모델링, AML 데이터 분석 | SQL 추출/집계, 특징 설계, 누수 없는 평가, 경보 수·오탐 분석 |
+| 금융 | 데이터 분석, Data Scientist, FDS, Fraud, 사기 위험 모델링 | SQL 추출/집계, 특징 설계, 누수 없는 평가, 경보 수·오탐 분석 |
 | 제조 | 제조 데이터 분석, 산업 AI, 설비 진단, 예지보전, 스마트팩토리, ML Engineer | 신호 처리, 조건별 평가, 반복 실험, 오탐 사례, 실행 가능한 데이터 파이프라인 |
 | 로봇 | Robot Learning, Robotics Data, 로봇 AI | observation/action/episode 이해, 재현 가능한 rollout, 작업 성공 평가 |
 
@@ -18,6 +18,8 @@ AML의 자금세탁 탐지와 FDS의 사기/이상거래 탐지는 목적과 업
 
 - [토스 Data Scientist (FDS) 직무 설명](https://toss.im/career/job-detail?job_id=7864347003): SQL, 특징 설계, 모델 개발, 룰 성능과 지표 운영을 요구한다. 신입 공고로 확인한 것은 아니며 목표 역량 참고용이다. 페이지의 이벤트 문구를 현재 모집 일정으로 해석하지 않았다.
 - [LG CNS 채용 안내](https://connect.lgcns.com/language-masters/us/careers/recruit-info?type=intern): 신입 AX/DX 경로와 학사 코딩테스트, Data/AI 석사 과제분석테스트 안내가 있다. 개인의 학력·전공·졸업예정일과 개별 공고 요건을 나중에 대조한다. 열려 있는 채용 건수를 이 문서에서 확정하지 않는다.
+
+최신 방향: 금융 대표 프로젝트는 사기 탐지로 정하며 기존 AML 자료를 사기 라벨로 바꾸지 않는다. 제조업·로봇의 장기 후보와 지원 준비 기준은 [PROJECT-DIRECTIONS.md](PROJECT-DIRECTIONS.md)를 참고한다. 아래 팬/PushT 실습은 입문 계획이며 제조업의 최종 연구 주제로 고정하지 않는다.
 
 ## 현재 학기의 첫 6주
 
