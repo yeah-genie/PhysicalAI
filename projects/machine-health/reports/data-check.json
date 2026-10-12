@@ -1,0 +1,19 @@
+{
+  "source": "https://zenodo.org/records/15097779",
+  "license": "CC-BY-NC-SA-4.0",
+  "selectedClips": 12,
+  "officialGroupCounts": {
+    "test/source/anomaly": 50,
+    "test/source/normal": 50,
+    "test/target/anomaly": 50,
+    "test/target/normal": 50,
+    "train/source/normal": 990,
+    "train/target/normal": 10
+  },
+  "note": "First two filenames per group; teaching sample only. No model trained, no benchmark evaluation, no time-to-failure inference.",
+  "checks": [
+    "archive entry CRC verified during download",
+    "all WAVs finite mono signals",
+    "four domain/label combinations visualized using the same color scale"
+  ]
+}

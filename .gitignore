@@ -7,3 +7,6 @@ site-preview/
 notes/design-review/ack-2026-extracted.*
 notes/design-review/BIN0001.PNG
 .playwright-mcp/
+projects/machine-health/data/
+exercises/lerobot-pusht/data/
+__pycache__/

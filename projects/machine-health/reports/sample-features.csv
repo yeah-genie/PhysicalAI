@@ -1,0 +1,13 @@
+file,split,domain,label,sample_rate,seconds,rms,peak,dominant_hz
+section_00_source_test_anomaly_0000_n_B.wav,test,source,1,16000,10.0,0.03226291517598154,0.63568115234375,62.1
+section_00_source_test_anomaly_0001_n_B.wav,test,source,1,16000,10.0,0.03225481274728578,0.15020751953125,62.1
+section_00_source_test_normal_0000_n_B.wav,test,source,0,16000,10.0,0.03223082037463118,0.186279296875,60.1
+section_00_source_test_normal_0001_n_B.wav,test,source,0,16000,10.0,0.03218995003298708,0.27325439453125,61.2
+section_00_target_test_anomaly_0000_n_D.wav,test,target,1,16000,10.0,0.03223129214481353,0.120361328125,361.0
+section_00_target_test_anomaly_0001_n_D.wav,test,target,1,16000,10.0,0.032259285933230436,0.129913330078125,360.40000000000003
+section_00_target_test_normal_0000_n_D.wav,test,target,0,16000,10.0,0.032154596301878065,0.12713623046875,363.1
+section_00_target_test_normal_0001_n_D.wav,test,target,0,16000,10.0,0.03221737795117772,0.1116943359375,361.90000000000003
+section_00_source_train_normal_0000_n_B.wav,train,source,0,16000,10.0,0.03217913115303349,0.195465087890625,63.7
+section_00_source_train_normal_0001_n_B.wav,train,source,0,16000,10.0,0.032217398009967854,0.1466064453125,61.2
+section_00_target_train_normal_0000_n_D.wav,train,target,0,16000,10.0,0.032216631848756574,0.129669189453125,360.70000000000005
+section_00_target_train_normal_0001_n_D.wav,train,target,0,16000,10.0,0.03222242416231951,0.13507080078125,361.1

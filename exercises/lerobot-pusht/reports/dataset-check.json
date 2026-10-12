@@ -1,0 +1,26 @@
+{
+  "dataset": "lerobot/pusht",
+  "revision": "7628202a2180972f291ba1bc6723834921e72c19",
+  "format": "v3.0",
+  "frames": 25650,
+  "episodes": 206,
+  "fps": 10,
+  "selectedEpisode": 0,
+  "selectedFrames": 161,
+  "firstObservation": [
+    222.0,
+    97.0
+  ],
+  "firstAction": [
+    233.0,
+    71.0
+  ],
+  "finalRecordedSuccess": false,
+  "note": "Recorded demonstration, not a newly trained/evaluated policy. next.success=False on an intermediate frame is not a failure label.",
+  "checks": [
+    "all episode frame indices contiguous",
+    "timestamps match fps",
+    "finite actions",
+    "selected episode has 2D state/action"
+  ]
+}

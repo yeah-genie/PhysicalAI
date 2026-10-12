@@ -1,0 +1,7 @@
+# Inspection scripts only; this is not a LeRobot training environment.
+numpy==2.2.6
+scipy==1.15.3
+pandas==2.3.3
+pyarrow==22.0.0
+matplotlib==3.10.8
+requests==2.32.5
