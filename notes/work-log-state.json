@@ -3,13 +3,41 @@
   "codexThreadId": "01a1117e-fb11-7393-9529-0c2a3b2120ec",
   "firstWorkDateKST": "2026-10-13",
   "logPath": "worklogs/2026-10-13.md",
-  "processedTurnIds": ["01a1310a-4a99-71c0-b327-c0a56a93e79c"],
-  "documentedWorkCommits": ["34a7c6136128f231b4a9754354eeab2aa091f776"],
-  "gitCheckpoint": "34a7c6136128f231b4a9754354eeab2aa091f776",
+  "processedTurnIds": [
+    "01a1310a-4a99-71c0-b327-c0a56a93e79c",
+    "01a13208-c9ed-7863-9e79-9a34911834e5",
+    "01a131fb-afa9-7be0-b47f-02b75b1bfc1c",
+    "01a131f1-9149-70d0-9abf-7b069478e689",
+    "01a131d4-14e9-7072-8670-4f29889e230e",
+    "01a131c2-ae10-7841-bef3-893e270e76e2",
+    "01a131aa-8005-7902-a053-705b3c64b3fb",
+    "01a131a2-7da2-7952-825a-78201bf56cad",
+    "01a1314c-b204-73e3-bf3c-019c5d7cf067",
+    "01a1314b-0b2a-70f0-9d30-489cd5988818",
+    "01a1312a-3119-77f1-8503-62d5327f606b",
+    "01a13128-bfd6-78f1-9f0f-1e9020d579ab",
+    "01a13115-6db3-7843-82a8-f8495be47b10",
+    "01a130fb-606e-7d90-a3a7-b50c844a5e67"
+  ],
+  "documentedWorkCommits": [
+    "34a7c6136128f231b4a9754354eeab2aa091f776",
+    "5a304be139efb2e4e784ea072b0f56e240104e28",
+    "6befa195610464e7c7ba7c315b3f002fafa2fdaa",
+    "9833dde98c853eb84d5c09cc73e6c75b30599beb",
+    "47af1c4f3600aea42fff0bf4f84769ce7d31fc8c"
+  ],
+  "gitCheckpoint": "47af1c4f3600aea42fff0bf4f84769ce7d31fc8c",
   "partiallyProcessedTurn": {
-    "id": "01a13115-6db3-7843-82a8-f8495be47b10",
-    "recorded": ["Codex work-log automation update", "literature analysis and proposed experiment"],
-    "remaining": "Recheck completed turn and commit outcome; supplement only genuinely new verified work, not repeated final summaries."
+    "id": "01a130ff-0e88-7bd2-b8e1-053d47d5a2f0",
+    "recorded": [
+      "Verified starter data, scripts and career plan in commit 34a7c6136128f231b4a9754354eeab2aa091f776"
+    ],
+    "remaining": "Source API still reports this earlier steered turn as inProgress. Do not infer completion or repeat its already documented work; inspect only genuinely new verified output."
   },
-  "exclude": ["heartbeat checks without changes", "commits changing only logs/worklogs/tracking state", "private unrelated conversation", "unverified learning completion"]
+  "exclude": [
+    "heartbeat checks without changes",
+    "commits changing only logs/worklogs/tracking state",
+    "private unrelated conversation",
+    "unverified learning completion"
+  ]
 }
